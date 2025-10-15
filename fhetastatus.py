@@ -20,7 +20,7 @@ class DeleteLinuxMod(loader.Module):
         "working": "<b><emoji document_id=5427009714745517609>✅</emoji>FHeta работает</b>",
         "not_working": "<b><emoji document_id=5465665476971471368>❌</emoji>Fheta недоступна</b>", 
         "_cmd_doc_fping": "проверить статус FHeta.", 
-        " _cls_doc": "НЕ ОФИЦИАЛЬНЫЙ FHeta МОДУЛЬ\nПроверьте статус FHeta"
+        "_cls_doc": "НЕ ОФИЦИАЛЬНЫЙ FHeta МОДУЛЬ\nПроверьте статус FHeta"
     }
 
     async def fpingcmd(self, message: Message):
