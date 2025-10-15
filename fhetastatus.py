@@ -1,4 +1,4 @@
-# NOT OFFICIAL FHeta MODULE
+# NOT OFFICIAL FHeta MODULE | НЕ ОФИЦИАЛЬНЫЙ FHeta МОДУЛЬ
 # meta developer: @mikhaylodm && @FHeta_Updates
 
 from herokutl.tl.types import Message
