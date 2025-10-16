@@ -7,7 +7,7 @@ from .. import loader, utils
 import requests
 
 @loader.tds
-class FHetaStatus:
+class FHetaStatus(loader.Module):
     """NOT OFFICIAL FHeta MODULE\nCheck fheta status"""
 
     strings = {
