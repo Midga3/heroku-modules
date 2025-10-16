@@ -7,7 +7,7 @@ from .. import loader, utils
 import requests
 
 @loader.tds
-class DeleteLinuxMod(loader.Module):
+class FHetaStatus:
     """NOT OFFICIAL FHeta MODULE\nCheck fheta status"""
 
     strings = {
