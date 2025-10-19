@@ -24,12 +24,12 @@ class BirthdayCount(loader.Module):
     async def bcountcmd(self, message):
         """check how many days left."""     
         async with self._client.conversation("@birthdaycountbot") as conv:
-			msg = await conv.send_message("/start")
-			r = await conv.get_response()
-			if ":" in r.text:
-				text = r.text
-			else:
-				text = self.strings("fail")
-			await msg.delete()
-			await r.delete()
-		await answer(message, text)
+            msg = await conv.send_message("/start")
+            r = await conv.get_response()
+            if ":" in r.text:
+                text = r.text
+            else:
+                text = self.strings("fail")
+            await msg.delete()
+            await r.delete()
+        await utils.answer(message, text)
