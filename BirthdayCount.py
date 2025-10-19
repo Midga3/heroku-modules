@@ -16,7 +16,7 @@ class BirthdayCount(loader.Module):
     }
     
     strings_ru = {
-        "fail": "<b><emoji document_id=5465665476971471368>❌</emoji></b>", 
+        "fail": "<b><emoji document_id=5465665476971471368>❌</emoji>Сначала зарегистрируйтесь в @birthdaycountbot</b>", 
         "_cmd_doc_bcount": "проверьте сколько дней осталось.", 
         "_cls_doc": "Счёт до др\nЧерез бота @birthdaycountbot"
     }
@@ -26,7 +26,7 @@ class BirthdayCount(loader.Module):
         async with self._client.conversation("@birthdaycountbot") as conv:
             msg = await conv.send_message("/start")
             r = await conv.get_response()
-            if ":" in r.text:
+            if "дне" in r.text or "day" in r.text:
                 text = r.text
             else:
                 text = self.strings("fail")
