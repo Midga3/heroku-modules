@@ -1,7 +1,9 @@
 # Free to use | MIDGA3
 # meta developer: @mikhaylodm
-
-from herokutl.tl.types import Message
+try:
+    from herokutl.tl.types import Message
+except:
+    from hikkatl.tl.types import Message
 from .. import loader, utils
 import requests
 
