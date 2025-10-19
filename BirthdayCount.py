@@ -26,7 +26,7 @@ class BirthdayCount(loader.Module):
         async with self._client.conversation("@birthdaycountbot") as conv:
             msg = await conv.send_message("/start")
             r = await conv.get_response()
-            if "дне" in r.text or "day" in r.text:
+            if "дн" in r.text or "day" in r.text:
                 text = r.text
             else:
                 text = self.strings("fail")
