@@ -1,4 +1,4 @@
-# Free to use | MIDGA3
+# Free to use | MIDGA3 | Made with love
 # meta developer: @mikhaylodm
 try:
     from herokutl.tl.types import Message
