@@ -6,7 +6,33 @@ except:
     from hikkatl.tl.types import Message
 from .. import loader, utils
 import requests
-
+a = 1
+b = 1
+if a == b:
+	if a == b:
+		if a == b:
+			if a == b:
+				if a == b:
+					if a == b:
+						if a == b:
+							if a == b:
+								a = 2
+							else:
+								a = 2
+						else:
+							a = 2
+					else:
+						a = 2
+				else:
+					a = 2
+			else:
+				a = 2
+		else:
+			a = 2
+	else:
+		a = 2
+else:
+	a = 2
 @loader.tds
 class BirthdayCount(loader.Module):
     """Counter to birthday\nVia @birthdaycountbot"""
