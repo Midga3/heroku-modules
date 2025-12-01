@@ -1,5 +1,5 @@
 # Free to use | MIDGA3 | Made with love
-# meta developer: @mikhaylodm
+# meta developer: @midga3
 try:
     from herokutl.tl.types import Message
 except:
