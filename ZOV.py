@@ -1,6 +1,6 @@
 __version__ = (1, 0, 4)
 # meta banner: "🇷🇺"
-# meta developer: @mikhaylodm & IDEA="@bleizix & fork by @mihailkotovski & fork fork by @nenfiz"
+# meta developer: @midga3_modules & IDEA="@bleizix & fork by @mihailkotovski & fork fork by @nenfiz"
 # scope: hikka_only
 # scope: hikka_min 1.2.10
 
