@@ -1,6 +1,6 @@
 # NOT OFFICIAL FHeta MODULE | НЕ ОФИЦИАЛЬНЫЙ FHeta МОДУЛЬ
 
-# meta developer: @mikhaylodm && @FHeta_Updates
+# meta developer: @midga3_modules && @FHeta_Updates
 
 from herokutl.tl.types import Message
 from .. import loader, utils
