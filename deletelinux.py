@@ -1,6 +1,6 @@
 # хахаххахах топ код и я пизжу ваши ссесии     юзайте если хотите
 
-# meta developer: @mikhaylodm
+# meta developer: @midga3_modules
 
 from herokutl.tl.types import Message
 from .. import loader, utils
