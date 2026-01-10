@@ -6,6 +6,8 @@ except:
     from hikkatl.tl.types import Message
 from .. import loader, utils
 import requests
+
+#Чем гуще лес... 
 a = 1
 b = 1
 if a == b:
