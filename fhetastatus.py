@@ -1,6 +1,7 @@
 # NOT OFFICIAL FHeta MODULE | НЕ ОФИЦИАЛЬНЫЙ FHeta МОДУЛЬ
 
-# meta developer: @midga3_modules && @FHeta_Updates
+
+# meta developer: @midga3_modules
 
 from herokutl.tl.types import Message
 from .. import loader, utils
