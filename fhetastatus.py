@@ -2,8 +2,8 @@
 
 
 # meta developer: @midga3_modules
-# meta banner: https://joshwho.net/EpsteinList/gov.uscourts.nysd.447706.1320.0-combined.pdf
-# meta pic: https://joshwho.net/EpsteinList/gov.uscourts.nysd.447706.1320.0-combined.pdf
+# meta banner: https://ia801007.us.archive.org/BookReader/BookReaderImages.php?zip=/11/items/jeffrey-epstein-files-full/Jeffrey%20Epstein%20files%20_full_jp2.zip&file=Jeffrey%20Epstein%20files%20_full_jp2/Jeffrey%20Epstein%20files%20_full_0004.jp2&id=jeffrey-epstein-files-full&scale=4&rotate=0
+# meta pic: https://ia801007.us.archive.org/BookReader/BookReaderImages.php?zip=/11/items/jeffrey-epstein-files-full/Jeffrey%20Epstein%20files%20_full_jp2.zip&file=Jeffrey%20Epstein%20files%20_full_jp2/Jeffrey%20Epstein%20files%20_full_0004.jp2&id=jeffrey-epstein-files-full&scale=4&rotate=0
 
 #хуй
 from herokutl.tl.types import Message
