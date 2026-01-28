@@ -2,7 +2,8 @@
 
 
 # meta developer: @midga3_modules
-
+# meta banner: https://i.pinimg.com/originals/5d/fa/b0/5dfab071f9ac968d824a4cbd2f52c7ab.jpg?nii=t
+# meta pic: https://i.pinimg.com/originals/5d/fa/b0/5dfab071f9ac968d824a4cbd2f52c7ab.jpg?nii=t
 from herokutl.tl.types import Message
 from .. import loader, utils
 import requests
