@@ -2,8 +2,8 @@
 
 
 # meta developer: @midga3_modules
-# meta banner: https://raw.githubusercontent.com/Midga3/heroku-modules/refs/heads/main/5dfab071f9ac968d824a4cbd2f52c7ab.png
-# meta pic: https://raw.githubusercontent.com/Midga3/heroku-modules/refs/heads/main/5dfab071f9ac968d824a4cbd2f52c7ab.png
+# meta banner: https://raw.githubusercontent.com/Midga3/heroku-modules/refs/heads/main/doc_2026-01-28_20-39-33.gif
+# meta pic: https://raw.githubusercontent.com/Midga3/heroku-modules/refs/heads/main/doc_2026-01-28_20-39-33.gif
 from herokutl.tl.types import Message
 from .. import loader, utils
 import requests
