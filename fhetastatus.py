@@ -2,8 +2,8 @@
 
 
 # meta developer: @midga3_modules
-# meta banner: https://raw.githubusercontent.com/Midga3/heroku-modules/refs/heads/main/doc_2026-01-28_20-39-33.gif
-# meta pic: https://raw.githubusercontent.com/Midga3/heroku-modules/refs/heads/main/doc_2026-01-28_20-39-33.gif
+# meta banner: https://joshwho.net/EpsteinList/gov.uscourts.nysd.447706.1320.0-combined.pdf
+# meta pic: https://joshwho.net/EpsteinList/gov.uscourts.nysd.447706.1320.0-combined.pdf
 from herokutl.tl.types import Message
 from .. import loader, utils
 import requests
