@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 @loader.tds
 class RadioListener(loader.Module):
-    """Listen and check online radio stations"""
+    """Listen and check radio stations"""
     strings = {
         "name": "RadioListener",
         "searching": "<b><tg-emoji emoji-id=5188217332748527444>🔍</tg-emoji> Searching for radio stations...</b>",
@@ -21,7 +21,8 @@ class RadioListener(loader.Module):
         "searching": "<b><tg-emoji emoji-id=5188217332748527444>🔍</tg-emoji> Поиск радиостанций...</b>",
         "not_found": "<b>❌ Радиостанции не найдены. {}</b>",
         "found": "<b>{}\nСЛУШАТЬ ЗДЕСЬ:</b>\n{}\n\n<code>Текущий трек: {}</code>",
-        "_cmd_doc_radiocmd": "поиск радио.", 
+        "_cmd_doc_radio": "поиск радио.", 
+        "_cls_doc": "Слушайте и проверяйте радиостанции"
     }
     async def radiocmd(self, message):
         """search radio."""
