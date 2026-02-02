@@ -60,3 +60,5 @@ class RadioListener(loader.Module):
                                 media = ""
                     await message.edit(self.strings("found").format(radio["radio_name"], radio["radio_link"], current_track), file=media if media else None)
                     return
+        else:
+            await message.edit(self.strings("not_found").format("No args"))
