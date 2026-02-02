@@ -15,7 +15,7 @@ class RadioListener(loader.Module):
         "name": "RadioListener",
         "searching": "<b><tg-emoji emoji-id=5188217332748527444>🔍</tg-emoji> Searching for radio stations...</b>",
         "not_found": "<b>❌ No online radio stations found. {}</b>",
-        "found": "<b>{}\nLISTEN HERE</b>:\n{}\n\nn<code>Current track:{}</code>",
+        "found": "<b>{}\nLISTEN HERE</b>:\n{}\n\n<code>Current track:{}</code>",
     }
     strings_ru = {
         "searching": "<b><tg-emoji emoji-id=5188217332748527444>🔍</tg-emoji> Поиск радиостанций...</b>",
@@ -44,8 +44,10 @@ class RadioListener(loader.Module):
                 logger.exception(f"{utils.ascii_face()}ERROR: {e}")
                 await message.edit(self.strings("not_found").format("Error fetching data"))
                 return None
+            found = False
             for radio in radios_data:
                 if difflib.SequenceMatcher(None, query.lower(), radio["radio_name"].lower()).ratio() > 0.5:
+                    found = True
                     async with aiohttp.ClientSession() as session:
                         async with session.get(radio["current_link"]) as resp:
                             if resp.status == 200:
@@ -60,6 +62,8 @@ class RadioListener(loader.Module):
                                 current_track = "Unknown"
                                 media = ""
                     await message.edit(self.strings("found").format(radio["radio_name"], radio["radio_link"], current_track), file=media if media else None)
-                    return
+                    break
+            if not found:
+                await message.edit(self.strings("not_found").format("No matching radio found"))
         else:
             await message.edit(self.strings("not_found").format("No args"))
