@@ -8,6 +8,8 @@ import logging
 from .. import loader, utils
 from herokutl.tl.types import Message
 
+__version__ = (1, 0, 0)
+
 logger = logging.getLogger(__name__)
 @loader.tds
 class speedruncom(loader.Module):
@@ -18,6 +20,7 @@ class speedruncom(loader.Module):
         "not_found": "<tg-emoji emoji-id=5210952531676504517>❌</tg-emoji>Not found, sry",
         "new_notify": "You got a new notification: {}",
         "token": "Token of sppedrun.com",
+        "_cls_doc": "Speedrun.com integration module",
     }
     async def client_ready(self):
         self.asset_channel = self._db.get("heroku.forums", "channel_id", 0)
@@ -76,6 +79,7 @@ class speedruncom(loader.Module):
 
     @loader.command()
     async def game(self, message: Message):
+        "Find speedruns by game"
         args = utils.get_args_raw(message)
         game = self.api.search(srcomapi.datatypes.Game, {"name": f"{args}"})[0]
         await message.edit(self.strings['searching'])
