@@ -8,7 +8,7 @@ import logging
 from .. import loader, utils
 from herokutl.tl.types import Message
 
-__version__ = (1, 0, 0)
+__version__ = (1, 0, 1)
 
 logger = logging.getLogger(__name__)
 @loader.tds
@@ -19,7 +19,7 @@ class speedruncom(loader.Module):
         "game": "<tg-emoji emoji-id=5370869711888194012>👾</tg-emoji> Game: {}\n<tg-emoji emoji-id=5789531407231487577>🎮</tg-emoji> Number of runs: {}. \n <tg-emoji emoji-id=5409008750893734809>🏆</tg-emoji>Top runs: \n{}",
         "not_found": "<tg-emoji emoji-id=5210952531676504517>❌</tg-emoji>Not found, sry",
         "new_notify": "You got a new notification: {}",
-        "token": "Token of sppedrun.com",
+        "token": "Token of speedrun.com",
         "_cls_doc": "Speedrun.com integration module",
     }
     async def client_ready(self):
