@@ -32,7 +32,7 @@ class FHetaStatus(loader.Module):
     async def fpingcmd(self, message: Message):
         """check fheta status"""
 
-        url = "https://api.fixyres.com/search" # Не ии это мне на будущее если менять
+        url = "https://api.fixyres.com/module/Midga3/heroku-modules/radiolistener.py" # Не ии это мне на будущее если менять
         response = requests.get(url)
         if response.status_code == 200 and response.text != "[]":
             meassage = await utils.answer(message, self.strings("working"))
