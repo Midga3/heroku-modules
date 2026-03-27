@@ -1,5 +1,8 @@
 # Free to use | MIDGA3 | Made with love
 # meta developer: @midga3_modules
+
+__version__ = (1, 0, 0)
+
 try:
     from herokutl.tl.types import Message
 except:
