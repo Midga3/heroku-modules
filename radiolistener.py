@@ -7,6 +7,7 @@ import aiohttp
 # meta banner: https://meta.hostingradio.ru/files/elements/cover-images/600x600/434e51ce-b4ac-4157-a699-4954c02dabb9.jpg 
 
 logger = logging.getLogger(__name__)
+version = (1, 0, 0)
 
 @loader.tds
 class RadioListener(loader.Module):
