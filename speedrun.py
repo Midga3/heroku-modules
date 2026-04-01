@@ -7,7 +7,7 @@ import srcomapi, srcomapi.datatypes as dt
 import logging
 from .. import loader, utils
 from herokutl.tl.types import Message
-__version__ = (1, 1, 0)
+__verison__ = (1, 1, 0)
 logger = logging.getLogger(__name__)
 @loader.tds
 class speedruncom(loader.Module):
@@ -124,8 +124,12 @@ class speedruncom(loader.Module):
                 player_id = run['players'][0]['id'] if 'players' in run and run['players'] else "Unknown"
                 player_name = self.api.get_user(str(player_id)).name
                 run_time = run['times']['realtime_t'] if 'times' in run else 0
-                video_url = run['videos']['links'][0]['uri'] if 'videos' in run and 'links' in run['videos'] and run['videos']['links'] else "No video"
-                lines.append(f"{index}. {player_name} - {run_time}s. {video_url}")
+                video_url = run['videos']['links'][0]['uri'] if 'videos' in run and 'links' in run['videos'] and run['videos']['links'] else None
+                if video_url:
+                    player_link = f'<a href="{video_url}">{player_name}</a>'
+                else:
+                    player_link = player_name
+                lines.append(f"{index}. {player_link} - {run_time}s")
             runs_text = "<blockquote expandable>" + "\n".join(lines) + "</blockquote>"
             pages.append(self.strings['game'].format(new_game_name, len(runs), runs_text))
 
