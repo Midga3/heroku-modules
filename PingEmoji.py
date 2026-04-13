@@ -2,7 +2,7 @@
 #Placeholder system is the best
 
 # meta developer: @midga3_modules
-__version__ = (1, 1, 1)
+__version__ = (1, 1, 2)
 
 import logging
 import aiohttp
@@ -23,6 +23,7 @@ class PingEmoji(loader.Module):
                 "<tg-emoji emoji-id=5276307163529092252>🔴</tg-emoji>",
                 "Ping Emoji",
             )
+        )
     async def client_ready(self, client, db):
         self._client = client
         utils.register_placeholder("ping_emoji", self.get_emoji)
