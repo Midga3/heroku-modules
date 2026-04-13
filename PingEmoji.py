@@ -2,7 +2,7 @@
 #Placeholder system is the best
 
 # meta developer: @midga3_modules
-__version__ = (1, 1, 0)
+__version__ = (1, 1, 1)
 
 import logging
 import aiohttp
@@ -16,7 +16,7 @@ class PingEmoji(loader.Module):
     strings = {
         "name": "PingEmoji"
     }
-     def __init__(self):
+    def __init__(self):
         self.config = loader.ModuleConfig(
             loader.ConfigValue(
                 "emoji", 
