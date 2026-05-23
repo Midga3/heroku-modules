@@ -14,6 +14,7 @@ __verison__ = (0, 1, 0)
 logger = logging.getLogger(__name__)
 @loader.tds
 class wordle(loader.Module):
+    """Wordle!"""
     strings = {
         "name": "Wordle",
         "loading": "Loading...",
