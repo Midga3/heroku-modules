@@ -1,7 +1,6 @@
 # Midga3
 
 # I AM NOT AFFICIATED WITH WORDLE
-# meta banner: https://github.com/Midga3/heroku-modules/blob/main/new_module.jpg?raw=true
 
 # meta developer: @midga3_modules
 
@@ -10,7 +9,7 @@ import random
 import logging
 from .. import loader, utils
 from herokutl.tl.types import Message
-__verison__ = (0, 1, 0)
+__verison__ = (0, 1, 1) 
 logger = logging.getLogger(__name__)
 @loader.tds
 class wordle(loader.Module):
@@ -60,9 +59,9 @@ class wordle(loader.Module):
         word = self._db.get("wordle", "word", "")
         attempts = self._db.get("wordle", "attempts", 0)
         buttons = self._db.get("wordle", "buttons", [])
+        markup = buttons + [[{"text":"Введите слово","input":self.strings("length"),"handler": self.handler}]]
         
         if len(guess) != 5:
-            markup = buttons + [[{"text":"Введите слово","input":self.strings("length"),"handler": self.handler}]]
             await call.edit(self.strings("length"), reply_markup=markup)
             return
         
@@ -116,7 +115,6 @@ class wordle(loader.Module):
             await call.edit(f"{self.strings('gg').format(word)}", reply_markup=buttons)
             self._db.set("wordle", "now_playing", False)
         else:
-            markup = buttons + [[{"text":"Введите слово","input":self.strings("length"),"handler": self.handler}]]
             await call.edit(f"{self.strings('attempts_left').format(attempts)}", reply_markup=markup)
     
     @loader.command()
