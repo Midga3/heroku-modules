@@ -9,7 +9,7 @@ import random
 import logging
 from .. import loader, utils
 from herokutl.tl.types import Message
-__verison__ = (0, 2, 0) 
+__verison__ = (0, 2, 1)  
 logger = logging.getLogger(__name__)
 @loader.tds
 class wordle(loader.Module):
@@ -60,9 +60,14 @@ class wordle(loader.Module):
         markup.append([{"text": "Введите слово", "input": self.strings("length"), "handler": self.handler}])
         return markup
 
+    def _norm(self, s):
+        if isinstance(s, bytes):
+            s = s.decode("utf-8", "ignore")
+        return (s or "").replace("\ufeff", "").strip().upper()
+
     async def handler(self, call, data):
-        guess = (data or "").strip().upper()
-        word = self._db.get("wordle", "word", "")
+        guess = self._norm(data)
+        word = self._norm(self._db.get("wordle", "word", ""))
         attempts = self._db.get("wordle", "attempts", 0)
         buttons = self._db.get("wordle", "buttons", []) or []
         markup = self._build_markup(buttons)
@@ -72,8 +77,13 @@ class wordle(loader.Module):
             return
 
         words = self._db.get("wordle", "words", []) or []
-        words_upper = [w.strip().upper() for w in words]
-        if guess not in words_upper:
+        words_set = set()
+        for w in words:
+            nw = self._norm(w)
+            if nw:
+                words_set.add(nw)
+
+        if guess not in words_set and guess != word:
             await call.edit(self.strings("real_word"), reply_markup=markup)
             return
 
@@ -91,15 +101,18 @@ class wordle(loader.Module):
         def _result(btns):
             res = ""
             for btn in btns:
-                if isinstance(btn, dict):
+                if not isinstance(btn, list):
                     continue
                 line = ""
                 for b in btn:
-                    if b.get("style") == "success":
+                    if not isinstance(b, dict):
+                        continue
+                    st = b.get("style")
+                    if st == "success":
                         line += "🟩"
-                    elif b.get("style") == "primary":
+                    elif st == "primary":
                         line += "🟨"
-                    elif b.get("style") == "danger":
+                    elif st == "danger":
                         line += "⬛"
                 if line:
                     res += line + "\n"
@@ -143,8 +156,18 @@ class wordle(loader.Module):
         try:
             response = requests.get(f"https://raw.githubusercontent.com/mimimishka449/Worlde/refs/heads/main/words_{self.config['language']}.txt")
             if response.status_code == 200:
-                words = response.text.splitlines()
-                word = random.choice(words).upper()
+                raw_words = response.text.splitlines()
+                words = []
+                seen = set()
+                for w in raw_words:
+                    nw = self._norm(w)
+                    if len(nw) == 5 and nw not in seen:
+                        seen.add(nw)
+                        words.append(nw)
+                if not words:
+                    await utils.answer(message, "Word list is empty.")
+                    return
+                word = random.choice(words)
                 self._db.set("wordle", "now_playing", True)
                 self._db.set("wordle", "attempts", 6)
                 self._db.set("wordle", "word", word)
