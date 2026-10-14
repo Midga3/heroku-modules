@@ -9,7 +9,7 @@ import random
 import logging
 from .. import loader, utils
 from herokutl.tl.types import Message
-__verison__ = (0, 1, 1) 
+__verison__ = (0, 2, 0) 
 logger = logging.getLogger(__name__)
 @loader.tds
 class wordle(loader.Module):
@@ -54,20 +54,29 @@ class wordle(loader.Module):
                 validator=loader.validators.Choice(["en", "ru"])
             ),
         )
+
+    def _build_markup(self, buttons):
+        markup = list(buttons)
+        markup.append([{"text": "Введите слово", "input": self.strings("length"), "handler": self.handler}])
+        return markup
+
     async def handler(self, call, data):
-        guess = data.upper()
+        guess = (data or "").strip().upper()
         word = self._db.get("wordle", "word", "")
         attempts = self._db.get("wordle", "attempts", 0)
-        buttons = self._db.get("wordle", "buttons", [])
-        markup = buttons + [[{"text":"Введите слово","input":self.strings("length"),"handler": self.handler}]]
-        
+        buttons = self._db.get("wordle", "buttons", []) or []
+        markup = self._build_markup(buttons)
+
         if len(guess) != 5:
             await call.edit(self.strings("length"), reply_markup=markup)
             return
-        
-        if guess not in self._db.get("wordle", "words", []):
+
+        words = self._db.get("wordle", "words", []) or []
+        words_upper = [w.strip().upper() for w in words]
+        if guess not in words_upper:
             await call.edit(self.strings("real_word"), reply_markup=markup)
             return
+
         buttons2 = []
         for i in range(5):
             if guess[i] == word[i]:
@@ -76,47 +85,47 @@ class wordle(loader.Module):
                 buttons2.append({"text": guess[i], "data": "custom/data", "style": "primary"})
             else:
                 buttons2.append({"text": guess[i], "data": "custom/data", "style": "danger"})
-        
+
         buttons.append(buttons2)
-        
+
+        def _result(btns):
+            res = ""
+            for btn in btns:
+                if isinstance(btn, dict):
+                    continue
+                line = ""
+                for b in btn:
+                    if b.get("style") == "success":
+                        line += "🟩"
+                    elif b.get("style") == "primary":
+                        line += "🟨"
+                    elif b.get("style") == "danger":
+                        line += "⬛"
+                if line:
+                    res += line + "\n"
+            return res
+
         if guess == word:
             self._db.set("wordle", "buttons", buttons)
             self._db.set("wordle", "now_playing", False)
-            result = ""
-            for btn in buttons:
-                for b in btn:
-                    if b["style"] == "success":
-                        result += "🟩"
-                    elif b["style"] == "primary":
-                        result += "🟨"
-                    else:
-                        result += "⬛"
-                result += "\n"
-            buttons.append([{"text":"Поделится резултатом","copy":self.strings("ad").format(word, result)}])
-            await call.edit(f"{self.strings('win').format(word)}", reply_markup=buttons)
+            result = _result(buttons)
+            buttons.append([{"text": "Поделится резултатом", "copy": self.strings("ad").format(word, result)}])
+            await call.edit(self.strings('win').format(word), reply_markup=buttons)
             return
-        
+
         self._db.set("wordle", "buttons", buttons)
         attempts -= 1
         self._db.set("wordle", "attempts", attempts)
-        
+
         if attempts == 0:
-            result = ""
-            for btn in buttons:
-                for b in btn:
-                    if b["style"] == "success":
-                        result += "🟩"
-                    elif b["style"] == "primary":
-                        result += "🟨"
-                    else:
-                        result += "⬛"
-                result += "\n"
-            buttons.append([{"text":"Поделится резултатом","copy":self.strings("ad").format(word, result)}])
-            await call.edit(f"{self.strings('gg').format(word)}", reply_markup=buttons)
+            result = _result(buttons)
+            buttons.append([{"text": "Поделится резултатом", "copy": self.strings("ad").format(word, result)}])
+            await call.edit(self.strings('gg').format(word), reply_markup=buttons)
             self._db.set("wordle", "now_playing", False)
         else:
-            await call.edit(f"{self.strings('attempts_left').format(attempts)}", reply_markup=markup)
-    
+            markup = self._build_markup(buttons)
+            await call.edit(self.strings('attempts_left').format(attempts), reply_markup=markup)
+
     @loader.command()
     async def wordle(self, message: Message):
         """Play wordle!"""
@@ -147,6 +156,7 @@ class wordle(loader.Module):
         except Exception as e:
             logger.exception(f"Error: {e}")
             await utils.answer(message, "An error occurred while fetching wordle data.")
+
     @loader.command()
     async def stopwordle(self, message: Message):
         """Stop the wordle game."""
