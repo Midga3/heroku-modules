@@ -11,9 +11,9 @@ __verison__ = (1, 1, 0)
 logger = logging.getLogger(__name__)
 @loader.tds
 class playsearch(loader.Module):
-  """
-  Search games!
-  """
+    """
+    Search games!
+    """
     strings = {
         "name": "PlaySearch",
         "searching": "<tg-emoji emoji-id=5188217332748527444>🔍</tg-emoji>Searching...",
