@@ -119,6 +119,7 @@ logger = logging.getLogger(__name__)
 @loader.tds
 
 class Hi(loader.Module):
+    strings = {"name": "Hi"}
     async def client_ready(self):
         if not self._db.get("arg", "usages", False):
             self._db.set("arg", "usages", 0)
