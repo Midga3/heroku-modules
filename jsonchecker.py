@@ -15,7 +15,7 @@ class jsonchecker(loader.Module):
         "name": "JSON Checker",
         "searching": "<tg-emoji emoji-id=5188217332748527444>🔍</tg-emoji>Loading...",
         "json": "<tg-emoji emoji-id=5370869711888194012>👾</tg-emoji> URL: {}\n<tg-emoji emoji-id=5789531407231487577>🎮</tg-emoji> Keys: {}. \n <tg-emoji emoji-id=5409008750893734809>🏆</tg-emoji>Content: \n{}",
-        "not_found": "<tg-emoji emoji-id=5210952531676504517>❌</tg-emoji>Not found, sry",
+        "not_found": "<tg-emoji emoji-id=5210952531676504517>❌</tg-emoji>Check your config, make sure you set the right URL.",
         "new_notify": "JSON changed:\n{}",
         "url": "URL of JSON file",
     }
@@ -35,12 +35,6 @@ class jsonchecker(loader.Module):
                 "url",
                 None,
                 lambda: self.strings("url"),
-            ),
-            loader.ConfigValue(
-                "show_all_15",
-                False,
-                "Show all 15 items on one page",
-                validator=loader.validators.Boolean(),
             ),
         )
 
@@ -140,7 +134,7 @@ class jsonchecker(loader.Module):
             lines.append(str(data)[:2000])
         keys_count = len(data) if hasattr(data, "__len__") else 0
         pages = []
-        step = 15 if self.config["show_all_15"] else 5
+        step = 5
         for page_start in range(0, max(len(lines), 1), step):
             chunk = lines[page_start:page_start + step]
             text = "<blockquote expandable>" + "\n".join(chunk) + "</blockquote>"
@@ -150,4 +144,4 @@ class jsonchecker(loader.Module):
             message=message,
             text=pages[0],
             reply_markup=self._json_nav(pages, 0)
-        )
+            )
